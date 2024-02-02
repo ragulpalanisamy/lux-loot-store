@@ -41,10 +41,10 @@ const CategoryPage = () => {
       {loading ? (
         <Loader />
       ) : (
-        <>
+        <div className='m-4 xl:m-0'>
           <Header title={filteredProducts[0]?.category} />
           <ProductCards productsData={filteredProducts} />
-        </>
+        </div>
       )}
     </div>
   );
