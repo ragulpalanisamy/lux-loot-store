@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Navbar from '@/app/layouts/Nav/Navbar';
 
 import '../app/globals.css';
+import Footer from '@/app/layouts/Footer';
 
 /* getting application environment */
 const { publicRuntimeConfig } = getConfig();
@@ -19,7 +20,7 @@ export default class MyApp extends App {
       <>
         <Navbar />
         <Component {...pageProps} />
-        {/* <Footer /> */}
+        <Footer />
 
         {/* Go Top Button */}
         {/* <GoTop scrollStepInPx="100" delayInMs="15.50" /> */}

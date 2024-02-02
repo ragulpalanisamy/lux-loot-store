@@ -48,14 +48,9 @@ const ProductDetail: React.FC = () => {
   const productsByCategory = products?.products.filter(
     (product: any) => product.category === productCategory
   );
-  console.log(
-    '%c 🥗 productsByCategory: ',
-    'font-size:12px;background-color: #2EAFB0;color:#fff;',
-    productsByCategory
-  );
 
   return (
-    <div className='p-4'>
+    <div className='p-4 pb-20'>
       <div className='max-w-7xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden'>
         {loading && <Loader />}
         <BreadCrumbs

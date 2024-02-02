@@ -5,12 +5,6 @@ interface DetailImageProps {
 }
 
 const DetailImage: React.FC<DetailImageProps> = ({ images = [] }) => {
-  console.log(
-    '%c 🥦 images: ',
-    'font-size:12px;background-color: #ED9EC7;color:#fff;',
-    images
-  );
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Navigate to the previous image
@@ -38,7 +32,7 @@ const DetailImage: React.FC<DetailImageProps> = ({ images = [] }) => {
         <img
           src={images[currentIndex]} // Changed from images[0] to use currentIndex
           alt={`Image ${currentIndex + 1}`}
-          className='w-full h-96 object-cover'
+          className='w-full p-5 lg:p-0 lg:h-96 object-contain lg:object-cover'
         />
       </div>
       {images.length > 1 && (

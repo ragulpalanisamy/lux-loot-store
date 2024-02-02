@@ -31,7 +31,9 @@ export default function Home() {
       ) : (
         <>
           <Header title={'All Products'} />
-          <Product product={products} />
+          <div className='m-4 xl:m-0'>
+            <Product product={products} />
+          </div>
         </>
       )}
     </div>

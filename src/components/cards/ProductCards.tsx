@@ -6,11 +6,6 @@ import PaginationControls from '../common/Pagination';
 import Link from 'next/link';
 
 export default function ProductCards({ productsData }: any) {
-  console.log(
-    '%c 🥧 productsData: ',
-    'font-size:12px;background-color: #EA7E5C;color:#fff;',
-    productsData
-  );
   /* Pagination controls state for the current page */
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,21 +28,20 @@ export default function ProductCards({ productsData }: any) {
             key={product.id}
             className='overflow-hidden bg-black rounded-lg shadow-2xl'
           >
+            {/* Use Next.js Link for client-side navigation */}
             <Link href={`/product/${product.id}`}>
-              {/* Product image  */}
-              <div className='group relative'>
-                <div className='w-full h-80 bg-gray-300 rounded-t-md overflow-hidden group-hover:opacity-65 hover:cursor-pointer'>
+              <p className='group relative block'>
+                <div className='w-full h-80 bg-gray-300 rounded-t-md overflow-hidden group-hover:opacity-65'>
                   <img
                     src={product.thumbnail}
                     alt={product.title}
-                    className='w-full h-full object-center hover:scale-110 transition-all object-cover'
+                    className='w-full h-full object-cover hover:scale-110 transition-all'
                   />
                 </div>
-                {/* Product details */}
                 <div className='p-4'>
-                  <div className='mb-2 hover:cursor-pointer'>
+                  <div className='mb-2'>
                     <h3 className='text-lg font-semibold hover:text-orange-400 truncate w-60 text-white'>
-                      <a href={product.href}>{product.title}</a>
+                      {product.title}
                     </h3>
                     <p className='text-sm text-amber-50'>
                       {product.brand} - {product.category}
@@ -56,16 +50,15 @@ export default function ProductCards({ productsData }: any) {
                   </div>
                   <div className='flex justify-between items-center'>
                     <div>
-                      {/* Product price with discount percentage */}
                       <p className='text-sm text-red-400 line-through'>
                         ${product.price}
                       </p>
-                      {/* Discounted price */}
                       <p className='text-sm text-green-500 font-semibold'>
-                        {`$${(
+                        $
+                        {(
                           product.price -
                           (product.price * product.discountPercentage) / 100
-                        ).toFixed(2)}`}
+                        ).toFixed(2)}
                         <span className='ml-1 text-yellow-500'>
                           ({product.discountPercentage}% off)
                         </span>
@@ -80,7 +73,7 @@ export default function ProductCards({ productsData }: any) {
                     </p>
                   </div>
                 </div>
-              </div>
+              </p>
             </Link>
           </div>
         ))}
