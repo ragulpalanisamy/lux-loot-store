@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Navbar() {
   const [products, setProducts] = useState<any>([]);
@@ -29,34 +30,30 @@ export default function Navbar() {
   }, [searchText]);
 
   return (
-    <nav className='navbar max-w-6xl mx-auto py-10'>
+    <nav className='navbar max-w-7xl mx-auto py-10'>
       <div className='flex justify-between'>
         <h2 className='text-3xl font-bold text-primary text-clip'>
           RagulBazaar
         </h2>
-        <input
-          type='search'
-          className='relative border-[0.3px] placeholder:text-sm border-borderColor bg-white pl-5 pr-10 py-5 text-base w-full text-light focus:outline-0 focus:border focus:border-secondary focus-visible:outline-0 focus:ring-0 bg-lightGray h-11 lg:w-[750px] xl:w-[900px]'
-          placeholder='search'
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-      </div>
-      <div>
-        <div className='flex justify-between py-10 text-xl hover:text-bold hover:text-secondary'>
-          {uniqueCategories.map((category, index) => (
-            <ul className='hover:font-bold hover:text-orange-300 hover:text-clip'>
-              <li
+        <div className='flex justify-center items-center gap-3'>
+          <div className='flex justify-center gap-3 text-xl hover:text-secondary'>
+            {uniqueCategories.map((category, index) => (
+              <ul
                 key={index}
-                className='text-base list-none  hover:font-bold font-medium'
+                className='hover:font-bold hover:text-white hover:text-clip'
               >
-                {category === 'all' ? (
-                  <a href='/'>All</a>
-                ) : (
-                  <a href={`#`}>{category as String}</a>
-                )}
-              </li>
-            </ul>
-          ))}
+                <li className='text-base list-none hover:font-bold font-medium'>
+                  {category === 'all' ? (
+                    <Link href='/'>All</Link>
+                  ) : (
+                    <Link href={`/category/${category}`}>
+                      {category as String}
+                    </Link>
+                  )}
+                </li>
+              </ul>
+            ))}
+          </div>
         </div>
       </div>
     </nav>

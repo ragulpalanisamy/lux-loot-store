@@ -1,12 +1,14 @@
 'use client';
+import ProductCards from '@/components/cards/ProductCards';
 import Header from '@/components/common/Header';
 import Loader from '@/components/common/Loader';
-import Product from '@/pages/product/page';
-import { useParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export default function Home() {
-  const params = useParams();
+const CategoryPage = () => {
+  const router = useRouter();
+  const { category } = router.query;
+
   const [products, setProducts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,16 +25,22 @@ export default function Home() {
       });
   }, []);
 
+  const filteredProducts = products.filter(
+    (product: any) => product.category === category
+  );
+
   return (
     <div className='flex max-w-7xl mx-auto flex-col items-center justify-between pb-24'>
       {loading ? (
         <Loader />
       ) : (
         <>
-          <Header title={'All Products'} />
-          <Product product={products} />
+          <Header title={filteredProducts[0]?.category} />
+          <ProductCards productsData={filteredProducts} />
         </>
       )}
     </div>
   );
-}
+};
+
+export default CategoryPage;
