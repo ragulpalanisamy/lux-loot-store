@@ -1,17 +1,23 @@
 'use client';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
 import ProductCards from '@/components/cards/ProductCards';
 import Header from '@/components/common/Header';
 import Loader from '@/components/common/Loader';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+
+import Search from '../search/page';
 
 const CategoryPage = () => {
+  /* Get category from query params  */
   const router = useRouter();
   const { category } = router.query;
 
+  /* Fetch products data using fetch and set state with data */
   const [products, setProducts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
+  /* Fetch products data using fetch and set state with data */
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}`)
       .then((res) => res.json())
@@ -25,6 +31,7 @@ const CategoryPage = () => {
       });
   }, []);
 
+  /* Filter products based on category name from query params  */
   const filteredProducts = products.filter(
     (product: any) => product.category === category
   );

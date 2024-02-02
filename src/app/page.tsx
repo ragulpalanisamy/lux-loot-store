@@ -1,15 +1,16 @@
 'use client';
-import Header from '@/components/common/Header';
-import Loader from '@/components/common/Loader';
-import Product from '@/pages/product/page';
-import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import Header from '@/components/common/Header';
+import Loader from '@/components/common/Loader';
+
+import Product from '@/pages/product/page';
+
 export default function Home() {
-  const params = useParams();
   const [products, setProducts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
+  /* Fetch products data using fetch and set state with data */
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}`)
       .then((res) => res.json())

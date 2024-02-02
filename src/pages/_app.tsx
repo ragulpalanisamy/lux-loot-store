@@ -1,23 +1,22 @@
 import getConfig from 'next/config';
 import App from 'next/app';
 import Head from 'next/head';
-import Navbar from '@/app/layouts/Nav/Navbar';
 
-const { publicRuntimeConfig } = getConfig();
-const { applicationEnvironment } = publicRuntimeConfig;
+import Navbar from '@/app/layouts/Nav/Navbar';
 
 import '../app/globals.css';
 
+/* getting application environment */
+const { publicRuntimeConfig } = getConfig();
+const { applicationEnvironment } = publicRuntimeConfig;
+
+/* Main App class */
 export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
     return (
       <>
-        <Head>
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <title>Ragul Bazaar</title>
-        </Head>
         <Navbar />
         <Component {...pageProps} />
         {/* <Footer /> */}
