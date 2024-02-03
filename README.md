@@ -4,7 +4,7 @@ Welcome to the luxLoot e-commerce platform, a modern, responsive online store fo
 
 ## Live Demo
 
-Visit [luxLoot live](#https://ragul-bazaar.vercel.app/) to explore the website.
+Visit [luxLoot live](https://ragul-bazaar.vercel.app/) to explore the website.
 
 ## Features
 
