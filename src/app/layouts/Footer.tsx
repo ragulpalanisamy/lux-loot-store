@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className='bg-gray-800 text-white py-12'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex flex-wrap justify-between items-center'>
+        <div className='flex flex-wrap justify-between items-start'>
           <div className='w-full sm:w-auto mb-4 sm:mb-0'>
             <Link href='/' className='text-2xl font-bold'>
               LuxLoot
@@ -25,9 +25,8 @@ export default function Footer() {
                 news and promotions.
               </p>
               <form
-                /* ragulpalanisamy1001@gmail.com this is my mail after clicking it need to send to me */
                 action='https://formsubmit.co/ragulpalanisamy1001@gmail.com'
-                className='md:flex items-center mt-4'
+                className='md:flex items-center space-x-2 mt-4'
                 onSubmit={(e) => {
                   e.preventDefault();
                   alert('Thank you for subscribing!');
@@ -36,11 +35,11 @@ export default function Footer() {
                 <input
                   type='email'
                   placeholder='Enter your email'
-                  className='bg-gray-700 text-white mb-2 md:mb-0 px-4 py-2 rounded-l'
+                  className='bg-gray-700 text-white mb-2 md:mb-0 px-4 py-2 rounded-lg'
                 />
                 <button
                   type='submit'
-                  className='bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 rounded-r'
+                  className='bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 rounded-lg'
                 >
                   Subscribe
                 </button>
@@ -52,7 +51,7 @@ export default function Footer() {
                 {SocialLinks?.map((link) => (
                   <li
                     key={link.id}
-                    className='text-2xl text-black hover:bg-orange-400 hover:text-white bg-white p-2 rounded-full'
+                    className='text-2xl text-black hover:bg-orange-500 hover:text-white bg-white p-2 rounded-full'
                   >
                     <Link
                       href={link.href}
