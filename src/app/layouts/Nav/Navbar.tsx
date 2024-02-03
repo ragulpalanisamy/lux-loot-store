@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 export default function Navbar() {
   const [products, setProducts] = useState<any>([]);
@@ -64,7 +65,7 @@ export default function Navbar() {
                 key={index}
                 href={category === 'all' ? '/' : `/category/${category}`}
               >
-                <p className='hover:text-orange-400 font-bold'>
+                <p className='hover:text-orange-400 font-semibold'>
                   {starCategories[index]}
                 </p>
               </Link>
@@ -72,7 +73,7 @@ export default function Navbar() {
           </div>
           <div>
             <Link href='/search/page'>
-              <p className='bg-red-500 hover:bg-orange-400 hover:rounded-full text-white font-bold py-2 px-4 rounded-full whitespace-nowrap'>
+              <p className='bg-orange-400 hover:bg-orange-500 hover:rounded-full text-white font-bold py-2 px-4 rounded-full whitespace-nowrap'>
                 Search
               </p>
             </Link>
@@ -95,7 +96,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Link href='/search/page'>
-              <p className='block bg-red-500 hover:bg-red-700 text-white px-3 py-2 rounded-md text-base font-medium'>
+              <p className='block bg-orange-400 hover:bg-orange-500 text-white px-3 py-2 rounded-md text-base font-medium'>
                 Search
               </p>
             </Link>

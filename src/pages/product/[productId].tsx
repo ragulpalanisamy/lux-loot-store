@@ -119,7 +119,7 @@ const ProductDetail: React.FC = () => {
               <div className='flex items-center'>
                 <button
                   onClick={handleBuyNow}
-                  className='mt-4 bg-red-500 hover:bg-orange-400 hover:rounded-full text-white font-bold py-2 px-4 rounded-full whitespace-nowrap'
+                  className='mt-4 bg-orange-400 hover:bg-orange-500 hover:rounded-full text-white font-bold py-2 px-4 rounded-full whitespace-nowrap'
                 >
                   Buy Now
                 </button>
@@ -141,7 +141,7 @@ const ProductDetail: React.FC = () => {
             </div>
           </div>
         </div>
-        <Header title='Similar Products' description='products you may like' />
+        <Header title='Similar Products' description='Products you may like' />
         <div className='p-4'>
           <ProductCards productsData={productsByCategory} />
         </div>

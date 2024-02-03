@@ -11,7 +11,7 @@ interface SocialLink {
 export const SocialLinks: SocialLink[] = [
   {
     id: 1,
-    href: 'https://twitter.com',
+    href: 'https://twitter.com/Ragul_1010',
     Icon: BsTwitter,
   },
   {
@@ -26,7 +26,12 @@ export const SocialLinks: SocialLink[] = [
   },
   {
     id: 4,
-    href: 'https://linkedin.com',
+    href: 'https://www.linkedin.com/in/ragul-palanisamy-139346194/',
     Icon: FaLinkedin,
+  },
+  {
+    id: 5,
+    href: 'https://github.com/ragulpalanisamy',
+    Icon: FaGithub,
   },
 ];
