@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# luxLoot E-Commerce Website
 
-## Getting Started
+Welcome to the luxLoot e-commerce platform, a modern, responsive online store for luxury goods. Built with the latest web technologies, luxLoot offers a seamless shopping experience, featuring a wide range of products, detailed product pages, a comprehensive category system, and an intuitive search function.
 
-First, run the development server:
+## Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Visit [luxLoot live](#https://ragul-bazaar.vercel.app/) to explore the website.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **All Products Display**: A dynamic display of all available products.
+- **Category-Based Filtering**: Browse products by categories for a tailored shopping experience.
+- **Product Detail Pages**: Detailed information on each product to help customers make informed decisions.
+- **Search Functionality**: An efficient search feature to quickly find products.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Built With
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- React 18 & Next.js 14.1.0: For robust front-end development and server-side rendering.
+- MUI (Material-UI) 5.15.7: For a comprehensive set of UI tools and components.
+- Axios 1.6.7: For promise-based HTTP requests.
+- lodash 4.17.21: For utility functions.
+- Flowbite-React 0.7.2 & React-Icons 5.0.1: For additional UI components and icons.
+- React Loader Spinner 6.1.6 & React Simple Image Slider 2.4.1: For enhanced user feedback and image display.
