@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         primary: 'linear-gradient(to top, #ed64a6, #ed8936, #805ad5)',
       },
+
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

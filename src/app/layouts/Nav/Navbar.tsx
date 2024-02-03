@@ -20,11 +20,19 @@ export default function Navbar() {
   /* Add 'all' category at the beginning of the array to include all products */
   uniqueCategories.unshift('all');
 
+  //Starcase converting the category
+  const starCategories = uniqueCategories.map((category: any) =>
+    category
+      .split('_')
+      .map((s: any) => s.charAt(0).toUpperCase() + s.slice(1))
+      .join(' ')
+  );
+
   return (
     <nav className='navbar max-w-7xl mx-auto py-10 px-5 lg:px-0'>
       <div className='flex justify-between lg:space-x-28 items-center'>
-        <h2 className='text-2xl sm:text-3xl font-bold text-primary'>
-          <Link href='/'>RagulBazaar</Link>
+        <h2 className='text-2xl sm:text-3xl p-2 font-bold text-orange-400'>
+          <Link href='/'>LuxLoot</Link>
         </h2>
 
         {/* Hamburger Button for smaller screens */}
@@ -49,22 +57,22 @@ export default function Navbar() {
         </button>
 
         {/* Desktop Menu: Visible on lg and larger screens */}
-        <div className='hidden lg:flex flex-grow justify-between items-center'>
+        <div className='hidden lg:flex justify-between items-center justify-items-center flex-1'>
           <div className='flex justify-center gap-3 text-xl'>
             {uniqueCategories.map((category, index) => (
               <Link
                 key={index}
                 href={category === 'all' ? '/' : `/category/${category}`}
               >
-                <p className='hover:font-bold hover:text-white'>
-                  {category as string}
+                <p className='hover:text-orange-400 font-bold'>
+                  {starCategories[index]}
                 </p>
               </Link>
             ))}
           </div>
           <div>
             <Link href='/search/page'>
-              <p className='bg-gradient-to-r from-slate-200 to-slate-100 px-5 py-2 rounded-md text-md font-bold'>
+              <p className='bg-red-500 hover:bg-orange-400 hover:rounded-full text-white font-bold py-2 px-4 rounded-full whitespace-nowrap'>
                 Search
               </p>
             </Link>
@@ -81,13 +89,13 @@ export default function Navbar() {
                 key={index}
                 href={category === 'all' ? '/' : `/category/${category}`}
               >
-                <p className='text-gray-700 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium'>
-                  {category as string}
+                <p className='text-gray-300 hover:text-orange-400 hover:bg-white block px-3 py-2 rounded-md text-base font-medium'>
+                  {starCategories[index]}
                 </p>
               </Link>
             ))}
             <Link href='/search/page'>
-              <p className='text-gray-700 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium'>
+              <p className='block bg-red-500 hover:bg-red-700 text-white px-3 py-2 rounded-md text-base font-medium'>
                 Search
               </p>
             </Link>

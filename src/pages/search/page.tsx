@@ -36,7 +36,7 @@ export default function Search() {
         <input
           type='text'
           placeholder='Search for products'
-          className='w-full sm:w-3/4 md:w-1/2 p-3 sm:p-5 rounded-lg border-2 border-black'
+          className='w-full sm:w-3/4 md:w-1/2 p-3 sm:p-5 rounded-lg border-2 border-orange-400 bg-gray-700 text-orange-400'
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>

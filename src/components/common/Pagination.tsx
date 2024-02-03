@@ -19,7 +19,7 @@ export default function PaginationControls({
       <Pagination
         count={pageCount}
         shape='rounded'
-        color='primary'
+        color='standard'
         size='large'
         onChange={handleChange}
       />

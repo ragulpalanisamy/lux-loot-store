@@ -17,18 +17,17 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  /* background: linear-gradient(
-    to bottom,
+  background: linear-gradient(
+    to top,
     rgba(var(--background-start-rgb), 1),
     rgba(var(--background-end-rgb), 1)
-  ); */
-  background: rgb(241, 140, 31);
+  );
+  /* background: rgb(241, 140, 31);
   background: linear-gradient(
     90deg,
     rgba(241, 140, 31, 0.8711134111847865) 4%,
     rgba(209, 37, 37, 0.633578431372549) 68%
-  );
+  ); */
   min-height: 100vh;
 }
 
