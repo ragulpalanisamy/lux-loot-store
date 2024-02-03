@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 import StarRating from '../common/StarRating';
 import PaginationControls from '../common/Pagination';
-import Link from 'next/link';
 
 export default function ProductCards({ productsData }: any) {
   /* Pagination controls state for the current page */
@@ -25,16 +25,16 @@ export default function ProductCards({ productsData }: any) {
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         {displayedProducts?.map((product: any) => (
           <div
-            key={product.id}
-            className='overflow-hidden bg-black rounded-lg shadow-2xl'
+            key={product?.id}
+            className='overflow-hidden bg-black rounded-lg shadow-2xl '
           >
             {/* Use Next.js Link for client-side navigation */}
             <Link href={`/product/${product.id}`}>
               <p className='group relative block'>
-                <div className='w-full h-80 bg-gray-300 rounded-t-md overflow-hidden group-hover:opacity-65'>
+                <div className='w-full h-80 bg-gray-50 rounded-t-md overflow-hidden group-hover:opacity-65'>
                   <img
-                    src={product.thumbnail}
-                    alt={product.title}
+                    src={product?.thumbnail}
+                    alt={product?.title}
                     className='w-full h-full object-cover hover:scale-110 transition-all'
                   />
                 </div>
@@ -43,32 +43,32 @@ export default function ProductCards({ productsData }: any) {
                     <h3 className='text-lg font-semibold hover:text-orange-400 truncate w-60 text-white'>
                       {product.title}
                     </h3>
-                    <p className='text-sm text-amber-50'>
-                      {product.brand} - {product.category}
+                    <p className='text-sm dark:text-amber-200 text-amber-50'>
+                      {product?.brand} - {product?.category}
                     </p>
-                    <StarRating rating={product.rating} />
+                    <StarRating rating={product?.rating} />
                   </div>
                   <div className='flex justify-between items-center'>
                     <div>
                       <p className='text-sm text-red-400 line-through'>
-                        ${product.price}
+                        ${product?.price}
                       </p>
                       <p className='text-sm text-green-500 font-semibold'>
                         $
                         {(
-                          product.price -
-                          (product.price * product.discountPercentage) / 100
+                          product?.price -
+                          (product?.price * product?.discountPercentage) / 100
                         ).toFixed(2)}
                         <span className='ml-1 text-yellow-500'>
-                          ({product.discountPercentage}% off)
+                          ({product?.discountPercentage}% off)
                         </span>
                       </p>
                     </div>
                     <p className='text-lg font-bold text-white'>
                       $
                       {(
-                        ((100 - product.discountPercentage) / 100) *
-                        product.price
+                        ((100 - product?.discountPercentage) / 100) *
+                        product?.price
                       ).toFixed(2)}
                     </p>
                   </div>
@@ -83,7 +83,7 @@ export default function ProductCards({ productsData }: any) {
         {productsData?.length > 8 && (
           <PaginationControls
             ItemsPerPage={8}
-            totalItems={productsData.length}
+            totalItems={productsData?.length}
             onPageChange={handlePageChange}
           />
         )}

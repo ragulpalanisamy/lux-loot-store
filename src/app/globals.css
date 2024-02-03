@@ -22,6 +22,8 @@ body {
     rgba(var(--background-start-rgb), 1),
     rgba(var(--background-end-rgb), 1)
   );
+  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb)); */
   /* background: rgb(241, 140, 31);
   background: linear-gradient(
     90deg,

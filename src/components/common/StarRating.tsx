@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function StarRating({ rating }: any) {
   /* Round the rating to the nearest integer */
-  const roundedRating = Math.floor(rating);
+  const roundedRating = Math?.floor(rating);
   return (
     <div>
       {/* Display stars based on the rounded rating value */}

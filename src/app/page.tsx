@@ -6,27 +6,33 @@ import Loader from '@/components/common/Loader';
 
 import Product from '@/pages/product/page';
 
+import { IProductProps } from './types';
+
+interface ProductProps {
+  product: IProductProps;
+}
+
 export default function Home() {
-  const [products, setProducts] = useState<any>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   /* Fetch products data using fetch and set state with data */
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}`)
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.products);
-        setLoading(false);
+        setProducts(data?.products);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        setLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
   return (
     <div className='flex max-w-7xl mx-auto flex-col items-center justify-between pb-24'>
-      {loading ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <>

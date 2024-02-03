@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+/* interface for DetailImage props  */
 interface DetailImageProps {
   images?: string[]; // Marking images as optional
 }
@@ -35,7 +36,7 @@ const DetailImage: React.FC<DetailImageProps> = ({ images = [] }) => {
           className='w-full p-5 lg:p-0 lg:h-96 object-contain lg:object-cover'
         />
       </div>
-      {images.length > 1 && (
+      {images?.length > 1 && (
         <>
           <button
             onClick={goToPrevious}

@@ -1,13 +1,12 @@
 'use client';
 import Link from 'next/link';
-import { BsTwitterX } from 'react-icons/bs';
-import { FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa';
-import { SocialLinks } from './constant';
 import React from 'react';
+
+import { SocialLinks } from './constant';
 
 export default function Footer() {
   return (
-    <footer className='bg-gray-800 text-white py-12'>
+    <footer className='bg-gray-800 text-white py-20'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex flex-wrap justify-between items-start'>
           <div className='w-full sm:w-auto mb-4 sm:mb-0'>
@@ -54,7 +53,7 @@ export default function Footer() {
                     className='text-2xl text-black hover:bg-orange-500 hover:text-white bg-white p-2 rounded-full'
                   >
                     <Link
-                      href={link.href}
+                      href={link?.href}
                       target='_blank'
                       rel='noopener noreferrer'
                     >
