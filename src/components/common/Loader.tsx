@@ -25,7 +25,7 @@ export default function Loader() {
       <TailSpin
         height={size}
         width={size}
-        color='black'
+        color='orange'
         ariaLabel='tail-spin-loading'
         radius='1'
         wrapperStyle={{}}

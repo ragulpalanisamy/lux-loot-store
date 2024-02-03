@@ -51,13 +51,13 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div className='p-4 pb-20'>
-      <div className='max-w-7xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden'>
+      <div className='max-w-7xl mx-auto overflow-hidden'>
         {loading && <Loader />}
         <BreadCrumbs
           title={getProductDetail?.category}
           subTitle={getProductDetail?.title}
         />
-        <div className='md:grid md:grid-cols-2 py-5 md:gap-6'>
+        <div className='md:grid md:grid-cols-2 bg-slate-50 py-5 md:gap-6'>
           <div className='md:flex-shrink-0'>
             <DetailImage images={getProductDetail?.images} />
           </div>
@@ -65,13 +65,23 @@ const ProductDetail: React.FC = () => {
             <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>
               {getProductDetail?.category}
             </div>
-            {getProductDetail?.title}
+            <p className='text-xl py-2 font-semibold'>
+              {getProductDetail?.brand}-{getProductDetail?.title}
+            </p>
             <p className='mt-2 text-gray-500'>
               {getProductDetail?.description}
             </p>
             <p className='mt-2 text-gray-500'>
               current stock:{' '}
-              <span className='text-red-500'>{getProductDetail?.stock}</span>
+              <span
+                className={`${
+                  getProductDetail?.stock > 1
+                    ? `text-green-600 font-bold`
+                    : `text-red-600`
+                }`}
+              >
+                {getProductDetail?.stock > 1 ? 'In Stock' : 'Out of Stock'}
+              </span>
             </p>
             <div className='mt-4'>
               <div className='text-lg'>
@@ -109,7 +119,7 @@ const ProductDetail: React.FC = () => {
               <div className='flex items-center'>
                 <button
                   onClick={handleBuyNow}
-                  className='mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded whitespace-nowrap'
+                  className='mt-4 bg-red-500 hover:bg-orange-400 hover:rounded-full text-white font-bold py-2 px-4 rounded-full whitespace-nowrap'
                 >
                   Buy Now
                 </button>

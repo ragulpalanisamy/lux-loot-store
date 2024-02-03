@@ -39,13 +39,13 @@ const DetailImage: React.FC<DetailImageProps> = ({ images = [] }) => {
         <>
           <button
             onClick={goToPrevious}
-            className='absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full p-1 text-gray-800 hover:bg-opacity-100 focus:outline-none'
+            className='absolute top-1/2 text-xl font-bold left-4 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full p-1 text-gray-800 hover:bg-opacity-100 focus:outline-none'
           >
             &lt;
           </button>
           <button
             onClick={goToNext}
-            className='absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full p-1 text-gray-800 hover:bg-opacity-100 focus:outline-none'
+            className='absolute font-bold top-1/2 text-xl right-4 transform -translate-y-1/2 bg-white bg-opacity-75 rounded-full p-1 text-gray-800 hover:bg-opacity-100 focus:outline-none'
           >
             &gt;
           </button>

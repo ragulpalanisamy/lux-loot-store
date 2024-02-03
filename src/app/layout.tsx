@@ -7,9 +7,9 @@ import Footer from './layouts/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'ragulBazaar',
+  title: 'LuxLoot',
   description:
-    'ragulBazaar is a simple React application for browsing and viewing product catalogs. It features an intuitive interface with search functionality, making it easy to find and explore products quickly.',
+    'LuxLoot is a simple React application for browsing and viewing product catalogs. It features an intuitive interface with search functionality, making it easy to find and explore products quickly.',
   keywords: [
     'react',
     'next',
