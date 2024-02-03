@@ -12,7 +12,7 @@ interface ProductProps {
   product: IProductProps;
 }
 
-export default function Home({ product }: ProductProps) {
+export default function Home() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
