@@ -1,13 +1,23 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+
+import Toast from '@/components/common/Toast/Toast';
 
 import { SocialLinks } from './constant';
 
 export default function Footer() {
+  const [showToast, setShowToast] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const handleSubscribe = () => {
+    if (!email) return;
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
   return (
     <footer className='bg-gray-800 text-white py-20'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 '>
         <div className='flex flex-wrap justify-between items-start'>
           <div className='w-full sm:w-auto mb-4 sm:mb-0'>
             <Link href='/' className='text-2xl font-bold'>
@@ -34,14 +44,22 @@ export default function Footer() {
                 <input
                   type='email'
                   placeholder='Enter your email'
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   className='bg-gray-700 text-white mb-2 md:mb-0 px-4 py-2 rounded-lg'
                 />
-                <button
-                  type='submit'
-                  className='bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 rounded-lg'
-                >
-                  Subscribe
-                </button>
+                <Link href='#' type='submit' onClick={() => handleSubscribe()}>
+                  <p className='bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 rounded-lg'>
+                    Subscribe
+                  </p>
+                </Link>
+                {showToast && (
+                  <Toast
+                    showToast={showToast}
+                    toastContent='Thank you for subscribing!'
+                  />
+                )}
               </form>
             </div>
             <div>

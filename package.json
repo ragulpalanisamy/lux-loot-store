@@ -25,6 +25,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.7",
     "axios": "^1.6.7",
+    "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",
     "lodash": "^4.17.21",
     "next": "14.1.0",
