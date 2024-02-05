@@ -25,12 +25,11 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 const DetailImage: React.FC<DetailImageProps> = ({ images = [] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   // If there are no images, display a fallback message
   if (images.length === 0) {
     return <div className='text-center py-4'>No images available</div>;
   }
-
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Navigate to the previous image
   const goToPrevious = () => {
