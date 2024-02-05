@@ -11,7 +11,7 @@ export default function Search() {
 
   /* Fetch products data using fetch */
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}`)
+    fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}?limit=100`)
       .then((res) => res.json())
       .then((data) => (setProducts(data.products), setIsLoading(false)))
       .catch((error) => {

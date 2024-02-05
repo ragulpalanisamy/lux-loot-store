@@ -1,27 +1,38 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
-  const [products, setProducts] = useState<any>([]);
+  const router = useRouter();
+  const [categories, setCategories] = useState<any>([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   /* Fetch products data using fetch and set state with data */
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}`)
+    fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}/categories`)
       .then((res) => res.json())
-      .then((data) => setProducts(data.products));
+      .then((data) => {
+        if (!data.includes('all')) {
+          // Check if 'all' is not already included
+          setCategories(['categories', 'all', ...data]);
+        } else {
+          setCategories(data); // Set data directly if 'all' is included or not needed
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
   }, []);
 
-  /* Get unique categories from products */
-  const categories = products.map((product: any) => product.category);
-  const uniqueCategories = Array.from(new Set(categories));
-
-  /* Add 'all' category at the beginning of the array to include all products */
-  uniqueCategories.unshift('all');
+  // Function to handle category change
+  const handleCategoryChange = (e: any) => {
+    const value = e.target.value;
+    router.push(value); // Use router to navigate
+  };
 
   return (
-    <nav className='navbar max-w-7xl mx-auto py-10 px-5 lg:px-0'>
+    <nav className='navbar max-w-7xl mx-auto py-6 px-5 lg:px-0'>
       <div className='flex justify-between lg:space-x-28 items-center'>
         <h2 className='text-2xl sm:text-3xl p-2 font-bold text-orange-400'>
           <Link href='/'>LuxLoot</Link>
@@ -48,23 +59,29 @@ export default function Navbar() {
           </svg>
         </button>
 
-        {/* Desktop Menu: Visible on lg and larger screens */}
-        <div className='hidden lg:flex justify-between items-center justify-items-center flex-1'>
+        {/* Desktop Menu */}
+        <div className='hidden lg:flex justify-end items-center justify-items-center space-x-5 flex-1'>
           <div className='flex justify-center gap-3 text-xl'>
-            {uniqueCategories.map((category, index) => (
-              <Link
-                key={index}
-                href={category === 'all' ? '/' : `/category/${category}`}
+            {categories.length > 0 && (
+              <select
+                className='hover:text-orange-400 focus:text-orange-400 focus:ring-0 focus:shadow-none focus:border-orange-200 text-black capitalize border-2 hover:border-orange-200 border-gray-200 font-semibold'
+                onChange={handleCategoryChange} // Updated to use the handler
               >
-                <p className='hover:text-orange-400 capitalize font-semibold'>
-                  {category as string}
-                </p>
-              </Link>
-            ))}
+                {categories.map((category: any, index: any) => (
+                  <option
+                    key={index}
+                    value={category === 'all' ? '/' : `/category/${category}`}
+                    className='hover:text-orange-400 focus:bg-orange-300  text-gray-900 capitalize font-medium'
+                  >
+                    {category}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
           <div>
             <Link href='/search/page'>
-              <p className='bg-orange-400 hover:bg-orange-500 hover:rounded-full text-white font-bold py-2 px-4 rounded-full whitespace-nowrap'>
+              <p className='bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-md whitespace-nowrap'>
                 Search
               </p>
             </Link>
@@ -72,22 +89,21 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu: Shown/Hidden based on state, below the navbar */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className='lg:hidden'>
           <div className='px-2 pt-2 pb-3 space-y-1 flex flex-col'>
-            {uniqueCategories.map((category, index) => (
+            {categories.map((category: any, index: any) => (
               <Link
                 key={index}
                 href={category === 'all' ? '/' : `/category/${category}`}
+                className='text-gray-900 hover:text-orange-400 hover:bg-white block text-start px-3 py-2 rounded-md text-base font-medium capitalize'
               >
-                <p className='text-gray-300 hover:text-orange-400 hover:bg-white block px-3 py-2 rounded-md text-base font-medium'>
-                  {category as string}
-                </p>
+                {category}
               </Link>
             ))}
             <Link href='/search/page'>
-              <p className='block bg-orange-400 hover:bg-orange-500 text-white px-3 py-2 rounded-md text-base font-medium'>
+              <p className='block bg-orange-400 hover:bg-orange-500 text-center text-white px-3 py-2 rounded-md text-base font-medium'>
                 Search
               </p>
             </Link>

@@ -1,15 +1,12 @@
-// ProductDetail.tsx
+'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { toNumber } from 'lodash';
-import axios from 'axios';
-import { Toast } from 'flowbite-react';
-import { HiCheck } from 'react-icons/hi';
 
 import ProductCards from '@/components/cards/ProductCards';
 import DetailImage from '@/components/cards/DetailImage';
-import Header from '@/components/common/Header';
 import Loader from '@/components/common/Loader';
+import Header from '@/components/common/Header';
+import Toast from '@/components/common/Toast/Toast';
 import BreadCrumbs from '@/components/BreadCrumbs';
 
 const ProductDetail: React.FC = () => {
@@ -21,16 +18,6 @@ const ProductDetail: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const [productsByCategory, setProductsByCategory] = useState<any>([]);
-  console.log(
-    '%c 🍠 productsByCategory: ',
-    'font-size:12px;background-color: #42b983;color:#fff;',
-    productsByCategory
-  );
-  console.log(
-    '%c 🍤 products: ',
-    'font-size:12px;background-color: #33A5FF;color:#fff;',
-    product
-  );
 
   /* Increase and decrease quantity */
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
@@ -71,15 +58,14 @@ const ProductDetail: React.FC = () => {
     }
   }, [product]);
 
-  return (
-    <div className='p-4 pb-20 dark:bg-gray-900'>
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <div className='p-4 pb-20 '>
       <div className='max-w-7xl mx-auto overflow-hidden'>
-        {isLoading && <Loader />}
         <BreadCrumbs title={product?.category} subTitle={product?.title} />
-        <div className='md:grid md:grid-cols-2 bg-slate-50 dark:bg-gray-800 py-5 md:gap-6'>
-          <div className='md:flex-shrink-0'>
-            <DetailImage images={product?.images} />
-          </div>
+        <div className='md:grid md:grid-cols-2 py-5 mt-5 md:gap-6 px-5'>
+          <DetailImage images={product?.images} />
           <div className='p-8'>
             <div className='uppercase tracking-wide text-sm text-indigo-500 dark:text-indigo-400 font-semibold'>
               {product?.category}
@@ -138,30 +124,31 @@ const ProductDetail: React.FC = () => {
               <div className='flex items-center'>
                 <button
                   onClick={handleBuyNow}
-                  className='mt-4 bg-orange-400 hover:bg-orange-500 dark:hover:bg-orange-600 hover:rounded-full text-white font-bold py-2 px-4 rounded-full whitespace-nowrap'
+                  className='mt-4 bg-orange-400 hover:bg-orange-500 dark:hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg whitespace-nowrap'
                 >
                   Buy Now
                 </button>
                 {showToast && (
-                  <div className='ml-4 flex items-center'>
-                    <Toast>
-                      <div className='inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200'>
-                        <HiCheck className='h-5 w-5' />
-                      </div>
-                      <div className='ml-3 text-sm font-normal dark:text-white'>
-                        Item added to cart successfully.
-                      </div>
-                    </Toast>
-                  </div>
+                  <Toast
+                    showToast={showToast}
+                    toastContent='Item added to cart successfully.'
+                  />
                 )}
               </div>
             </div>
           </div>
         </div>
-        <Header title='Similar Products' description='Products you may like' />
-        <div className='p-4'>
-          {<ProductCards productsData={productsByCategory} />}
-        </div>
+        {productsByCategory && (
+          <div className='mt-5'>
+            <Header
+              title='Similar Products'
+              description='Products you may like'
+            />
+            <div className='p-4'>
+              {<ProductCards productsData={productsByCategory} />}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

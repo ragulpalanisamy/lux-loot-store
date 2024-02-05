@@ -18,7 +18,7 @@ export default function Home() {
 
   /* Fetch products data using fetch and set state with data */
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}`)
+    fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}?limit=100`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data?.products);

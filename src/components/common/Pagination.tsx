@@ -1,3 +1,4 @@
+'use client';
 import { Pagination } from '@mui/material';
 
 export default function PaginationControls({

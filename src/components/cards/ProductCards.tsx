@@ -22,25 +22,25 @@ export default function ProductCards({ productsData }: any) {
 
   return (
     <>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6'>
         {displayedProducts?.map((product: any) => (
           <div
             key={product?.id}
-            className='overflow-hidden bg-black rounded-lg shadow-2xl '
+            className='overflow-hidden bg-black rounded-lg hover:shadow-sm'
           >
             {/* Use Next.js Link for client-side navigation */}
             <Link href={`/product/${product.id}`}>
               <div className='group relative block'>
-                <div className='w-full h-80 bg-gray-50 rounded-t-md overflow-hidden group-hover:opacity-65'>
+                <div className='w-full h-64 rounded-t-md'>
                   <img
                     src={product?.thumbnail}
                     alt={product?.title}
-                    className='w-full h-full object-cover hover:scale-110 transition-all'
+                    className='w-full h-full object-fill hover:scale-110 transition-all'
                   />
                 </div>
                 <div className='p-4'>
                   <div className='mb-2'>
-                    <h3 className='text-lg font-semibold hover:text-orange-400 truncate w-60 text-white'>
+                    <h3 className='text-lg font-semibold capitalize hover:text-orange-400 truncate w-60 text-white'>
                       {product.title}
                     </h3>
                     <p className='text-sm dark:text-amber-200 text-amber-50'>
