@@ -30,7 +30,7 @@ export default function ProductCards({ productsData }: any) {
           >
             {/* Use Next.js Link for client-side navigation */}
             <Link href={`/product/${product.id}`}>
-              <p className='group relative block'>
+              <div className='group relative block'>
                 <div className='w-full h-80 bg-gray-50 rounded-t-md overflow-hidden group-hover:opacity-65'>
                   <img
                     src={product?.thumbnail}
@@ -73,7 +73,7 @@ export default function ProductCards({ productsData }: any) {
                     </p>
                   </div>
                 </div>
-              </p>
+              </div>
             </Link>
           </div>
         ))}

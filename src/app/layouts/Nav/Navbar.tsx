@@ -20,14 +20,6 @@ export default function Navbar() {
   /* Add 'all' category at the beginning of the array to include all products */
   uniqueCategories.unshift('all');
 
-  //Starcase converting the category
-  const starCategories = uniqueCategories.map((category: any) =>
-    category
-      .split('_')
-      .map((s: any) => s.charAt(0).toUpperCase() + s.slice(1))
-      .join(' ')
-  );
-
   return (
     <nav className='navbar max-w-7xl mx-auto py-10 px-5 lg:px-0'>
       <div className='flex justify-between lg:space-x-28 items-center'>
@@ -64,8 +56,8 @@ export default function Navbar() {
                 key={index}
                 href={category === 'all' ? '/' : `/category/${category}`}
               >
-                <p className='hover:text-orange-400 font-semibold'>
-                  {starCategories[index]}
+                <p className='hover:text-orange-400 capitalize font-semibold'>
+                  {category as string}
                 </p>
               </Link>
             ))}
@@ -90,7 +82,7 @@ export default function Navbar() {
                 href={category === 'all' ? '/' : `/category/${category}`}
               >
                 <p className='text-gray-300 hover:text-orange-400 hover:bg-white block px-3 py-2 rounded-md text-base font-medium'>
-                  {starCategories[index]}
+                  {category as string}
                 </p>
               </Link>
             ))}
