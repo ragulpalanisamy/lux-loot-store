@@ -14,13 +14,23 @@ import BreadCrumbs from '@/components/BreadCrumbs';
 
 const ProductDetail: React.FC = () => {
   /* Get product id from query params  */
-  const id = useRouter().query;
-  const productId = id.productId ? toNumber(id.productId) : 0;
+  const { productId } = useRouter().query;
 
-  const [products, setProducts] = useState<any>();
+  const [product, setProduct] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [showToast, setShowToast] = useState(false);
+  const [productsByCategory, setProductsByCategory] = useState<any>([]);
+  console.log(
+    '%c 🍠 productsByCategory: ',
+    'font-size:12px;background-color: #42b983;color:#fff;',
+    productsByCategory
+  );
+  console.log(
+    '%c 🍤 products: ',
+    'font-size:12px;background-color: #33A5FF;color:#fff;',
+    product
+  );
 
   /* Increase and decrease quantity */
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
@@ -34,76 +44,78 @@ const ProductDetail: React.FC = () => {
 
   /* Fetch products data using axios  */
   useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}`)
-      .then((data) => (setProducts(data?.data), setIsLoading(false)))
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      });
+    // axios
+    //   .get(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}`)
+    if (productId) {
+      fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}/${productId}`)
+        .then((res) => res.json())
+        .then((data) => (setProduct(data), setIsLoading(false)))
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+          setIsLoading(false);
+        });
+    }
   }, [productId]);
 
-  /* Filter products based on product id */
-  const getProductDetail: any = products?.products?.find(
-    (product: any) => product?.id === productId
-  );
-
-  /* Filter products based on category name */
-  const productCategory = getProductDetail?.category;
-  const productsByCategory = products?.products?.filter(
-    (product: any) => product?.category === productCategory
-  );
+  useEffect(() => {
+    if (product) {
+      fetch(
+        `${process.env.NEXT_PUBLIC_PRODUCTS_URL}/category/${product?.category}`
+      )
+        .then((res) => res.json())
+        .then((data) => setProductsByCategory(data?.products))
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+          setIsLoading(false);
+        });
+    }
+  }, [product]);
 
   return (
     <div className='p-4 pb-20 dark:bg-gray-900'>
       <div className='max-w-7xl mx-auto overflow-hidden'>
         {isLoading && <Loader />}
-        <BreadCrumbs
-          title={getProductDetail?.category}
-          subTitle={getProductDetail?.title}
-        />
+        <BreadCrumbs title={product?.category} subTitle={product?.title} />
         <div className='md:grid md:grid-cols-2 bg-slate-50 dark:bg-gray-800 py-5 md:gap-6'>
           <div className='md:flex-shrink-0'>
-            <DetailImage images={getProductDetail?.images} />
+            <DetailImage images={product?.images} />
           </div>
           <div className='p-8'>
             <div className='uppercase tracking-wide text-sm text-indigo-500 dark:text-indigo-400 font-semibold'>
-              {getProductDetail?.category}
+              {product?.category}
             </div>
             <p className='text-xl py-2 font-semibold dark:text-orange-400'>
-              {getProductDetail?.brand}-{getProductDetail?.title}
+              {product?.brand}-{product?.title}
             </p>
             <p className='mt-2 text-gray-500 dark:text-gray-400'>
-              {getProductDetail?.description}
+              {product?.description}
             </p>
             <p className='mt-2 text-gray-500 dark:text-gray-400'>
               current stock:{' '}
               <span
                 className={`${
-                  getProductDetail?.stock > 1
+                  product?.stock > 1
                     ? `text-green-600 dark:text-green-400 font-bold`
                     : `text-red-600 dark:text-red-400`
                 }`}
               >
-                {getProductDetail?.stock > 1 ? 'In Stock' : 'Out of Stock'}
+                {product?.stock > 1 ? 'In Stock' : 'Out of Stock'}
               </span>
             </p>
             <div className='mt-4'>
               <div className='text-lg'>
                 <span className='text-gray-500 line-through dark:text-gray-400'>
-                  ${getProductDetail?.price}
+                  ${product?.price}
                 </span>
                 <span className='ml-4 text-red-600 dark:text-red-400'>
                   $
                   {(
-                    getProductDetail?.price -
-                    (getProductDetail?.price *
-                      getProductDetail?.discountPercentage) /
-                      100
+                    product?.price -
+                    (product?.price * product?.discountPercentage) / 100
                   ).toFixed(2)}
                 </span>
                 <span className='ml-2 text-green-500 dark:text-green-400'>
-                  ({getProductDetail?.discountPercentage}% off)
+                  ({product?.discountPercentage}% off)
                 </span>
               </div>
               <div className='flex items-center my-4'>
@@ -137,7 +149,7 @@ const ProductDetail: React.FC = () => {
                         <HiCheck className='h-5 w-5' />
                       </div>
                       <div className='ml-3 text-sm font-normal dark:text-white'>
-                        Item moved successfully.
+                        Item added to cart successfully.
                       </div>
                     </Toast>
                   </div>
@@ -148,7 +160,7 @@ const ProductDetail: React.FC = () => {
         </div>
         <Header title='Similar Products' description='Products you may like' />
         <div className='p-4'>
-          <ProductCards productsData={productsByCategory} />
+          {<ProductCards productsData={productsByCategory} />}
         </div>
       </div>
     </div>

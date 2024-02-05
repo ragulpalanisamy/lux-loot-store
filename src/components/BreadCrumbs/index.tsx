@@ -20,7 +20,7 @@ export default function BreadCrumbs({ title, subTitle }: any) {
           </Link>
         </Breadcrumb>
         <Breadcrumb.Item href={`/category/${title}`}>
-          <span className='truncate hover:text-orange-400 text-black'>
+          <span className='truncate capitalize hover:text-orange-400 text-black'>
             {title}
           </span>
         </Breadcrumb.Item>
