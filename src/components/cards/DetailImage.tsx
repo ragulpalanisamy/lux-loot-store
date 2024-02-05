@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Carousel, Flowbite } from 'flowbite-react';
 import type { CustomFlowbiteTheme } from 'flowbite-react';
 
@@ -30,20 +30,65 @@ const DetailImage: React.FC<DetailImageProps> = ({ images = [] }) => {
     return <div className='text-center py-4'>No images available</div>;
   }
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Navigate to the previous image
+  const goToPrevious = () => {
+    const newIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  // Navigate to the next image
+  const goToNext = () => {
+    const newIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
   // Render the carousel with the images provided
   return (
-    <Flowbite theme={{ theme: customTheme }}>
-      <Carousel slideInterval={5000}>
-        {images.map((image, index) => (
+    <>
+      <div className='hidden md:block w-full h-full'>
+        <Flowbite theme={{ theme: customTheme }}>
+          <Carousel slideInterval={5000}>
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Slide ${index + 1}`}
+                className='w-full h-full object-cover'
+              />
+            ))}
+          </Carousel>
+        </Flowbite>
+      </div>
+      {/* // Render the carousel with navigation buttons */}
+      <div className=' block md:hidden relative max-w-lg mx-auto'>
+        <div className='overflow-hidden'>
+          {/* Use currentIndex to display the current image */}
           <img
-            key={index}
-            src={image}
-            alt={`Slide ${index + 1}`}
-            className='w-full h-full object-fill'
+            src={images[currentIndex]} // Changed from images[0] to use currentIndex
+            alt={`Image ${currentIndex + 1}`}
+            className='w-full p-5 lg:p-0 lg:h-96 object-contain lg:object-cover'
           />
-        ))}
-      </Carousel>
-    </Flowbite>
+        </div>
+        {images?.length > 1 && (
+          <>
+            <button
+              onClick={goToPrevious}
+              className='absolute top-1/2 text-xl font-bold left-4 transform -translate-y-1/2 bg-orange-300 bg-opacity-75 rounded-full p-1 text-white hover:bg-opacity-100 focus:outline-none'
+            >
+              &lt;
+            </button>
+            <button
+              onClick={goToNext}
+              className='absolute font-bold top-1/2 text-xl right-4 transform -translate-y-1/2 bg-orange-300 bg-opacity-75 rounded-full p-1 text-white hover:bg-opacity-100 focus:outline-none'
+            >
+              &gt;
+            </button>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

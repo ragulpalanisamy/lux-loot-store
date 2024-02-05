@@ -62,10 +62,12 @@ const ProductDetail: React.FC = () => {
     <Loader />
   ) : (
     <div className='p-4 pb-20 '>
-      <div className='max-w-7xl mx-auto overflow-hidden'>
+      <div className='max-w-7xl mx-auto '>
         <BreadCrumbs title={product?.category} subTitle={product?.title} />
-        <div className='md:grid md:grid-cols-2 py-5 mt-5 md:gap-6 px-5'>
-          <DetailImage images={product?.images} />
+        <div className='grid grid-cols-1 md:grid-cols-2 py-5 mt-5 md:gap-6 px-5'>
+          <div className='md:flex-shrink-0'>
+            <DetailImage images={product?.images} />
+          </div>
           <div className='p-8'>
             <div className='uppercase tracking-wide text-sm text-indigo-500 dark:text-indigo-400 font-semibold'>
               {product?.category}
