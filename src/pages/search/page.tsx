@@ -1,8 +1,7 @@
 'use client';
+import { Loader, ProductCards } from '@/components';
 import { useEffect, useState } from 'react';
 
-import ProductCards from '@/components/cards/ProductCards';
-import Loader from '@/components/common/Loader';
 
 export default function Search() {
   const [search, setSearch] = useState<string>('');
