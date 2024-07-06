@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import StarRating from '../common/StarRating';
 import PaginationControls from '../common/Pagination';
@@ -32,10 +33,12 @@ export default function ProductCards({ productsData }: any) {
             <Link href={`/product/${product.id}`}>
               <div className='group relative block'>
                 <div className='w-full h-64 rounded-t-md'>
-                  <img
+                  <Image
                     src={product?.thumbnail}
                     alt={product?.title}
                     className='w-full h-full object-fill hover:scale-110 transition-all'
+                    width={100}
+                    height={100}
                   />
                 </div>
                 <div className='p-4'>

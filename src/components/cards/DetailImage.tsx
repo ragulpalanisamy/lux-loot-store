@@ -24,7 +24,7 @@ const customTheme: CustomFlowbiteTheme = {
   },
 };
 
-const DetailImage: React.FC<DetailImageProps> = ({ images = [] }) => {
+export default function DetailImage({ images = [] } : DetailImageProps){
   const [currentIndex, setCurrentIndex] = useState(0);
   // If there are no images, display a fallback message
   if (images.length === 0) {
@@ -91,4 +91,3 @@ const DetailImage: React.FC<DetailImageProps> = ({ images = [] }) => {
   );
 };
 
-export default DetailImage;

@@ -1,6 +1,6 @@
 'use client';
-import ProductCards from '@/components/cards/ProductCards';
-import Loader from '@/components/common/Loader';
+
+import { ProductCards, Loader } from "@/components";
 
 export default function Product({ product }: any) {
   return (

@@ -2,12 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import ProductCards from '@/components/cards/ProductCards';
-import DetailImage from '@/components/cards/DetailImage';
-import Loader from '@/components/common/Loader';
-import Header from '@/components/common/Header';
-import Toast from '@/components/common/Toast/Toast';
-import BreadCrumbs from '@/components/BreadCrumbs';
+import { Loader, BreadCrumbs, DetailImage, Header, ProductCards ,ToastComponent } from '@/components';
 
 const ProductDetail: React.FC = () => {
   /* Get product id from query params  */
@@ -131,7 +126,7 @@ const ProductDetail: React.FC = () => {
                   Buy Now
                 </button>
                 {showToast && (
-                  <Toast
+                  <ToastComponent
                     showToast={showToast}
                     toastContent='Item added to cart successfully.'
                   />

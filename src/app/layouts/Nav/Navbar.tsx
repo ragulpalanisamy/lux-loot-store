@@ -3,19 +3,32 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+interface Category {
+  slug: string;
+  name: string;
+  url: string;
+}
+
 export default function Navbar() {
   const router = useRouter();
-  const [categories, setCategories] = useState<any>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  /* Fetch products data using fetch and set state with data */
+  // Fetch products data using fetch and set state with data
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_PRODUCTS_URL}/categories`)
       .then((res) => res.json())
       .then((data) => {
         if (!data.includes('all')) {
           // Check if 'all' is not already included
-          setCategories(['categories', 'all', ...data]);
+          setCategories([
+            {
+              name: 'all',
+              slug: 'all',
+              url: 'https://dummyjson.com/products/category/',
+            },
+            ...data,
+          ]);
         } else {
           setCategories(data); // Set data directly if 'all' is included or not needed
         }
@@ -65,17 +78,24 @@ export default function Navbar() {
             {categories.length > 0 && (
               <select
                 className='hover:text-orange-400 focus:text-orange-400 focus:ring-0 focus:shadow-none focus:border-orange-200 text-black capitalize border-2 hover:border-orange-200 border-gray-200 font-semibold'
-                onChange={handleCategoryChange} // Updated to use the handler
+                onChange={handleCategoryChange}
               >
-                {categories.map((category: any, index: any) => (
-                  <option
-                    key={index}
-                    value={category === 'all' ? '/' : `/category/${category}`}
-                    className='hover:text-orange-400 focus:bg-orange-300  text-gray-900 capitalize font-medium'
-                  >
-                    {category}
-                  </option>
-                ))}
+                {categories.map((category, index) => {
+                  const categoryName =
+                    typeof category === 'string' ? category : category?.name;
+                  const categoryValue =
+                    categoryName === 'all' ? '/' : `/category/${categoryName}`;
+
+                  return (
+                    <option
+                      key={index}
+                      value={categoryValue}
+                      className='hover:text-orange-400 focus:bg-orange-300 text-gray-900 capitalize font-medium'
+                    >
+                      {categoryName}
+                    </option>
+                  );
+                })}
               </select>
             )}
           </div>
@@ -93,13 +113,15 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className='lg:hidden'>
           <div className='px-2 pt-2 pb-3 space-y-1 flex flex-col'>
-            {categories.map((category: any, index: any) => (
+            {categories.map((category, index) => (
               <Link
                 key={index}
-                href={category === 'all' ? '/' : `/category/${category}`}
+                href={
+                  category?.name === 'all' ? '/' : `/category/${category?.name}`
+                }
                 className='text-gray-900 hover:text-orange-400 hover:bg-white block text-start px-3 py-2 rounded-md text-base font-medium capitalize'
               >
-                {category}
+                {typeof category === 'string' ? category : category?.name}
               </Link>
             ))}
             <Link href='/search/page'>
