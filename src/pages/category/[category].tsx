@@ -2,9 +2,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import ProductCards from '@/components/cards/ProductCards';
-import Header from '@/components/common/Header';
-import Loader from '@/components/common/Loader';
+import { Header, Loader, ProductCards } from '@/components';
 
 const CategoryPage = () => {
   /* Get category from query params  */
